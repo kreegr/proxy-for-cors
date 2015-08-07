@@ -4,17 +4,17 @@ var httpProxy = require('http-proxy');
 var options = require('./options');
 var proxy = httpProxy.createProxyServer(options);
 var http = require('http');
-var https = require('https');
 
 var args = [].concat(process.argv).splice(-1);
 
 proxy.on('proxyReq', function(proxyReq, req, res, options){
-    console.log('proxyReq');
+    console.log('proxying ' + req.url);
 });
 
 proxy.on('proxyRes', function(proxyRes, req, res, options){
     res.setHeader('Access-Control-Allow-Origin', '*');
-    console.log('proxyRes');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT');
 });
 
 var server = http.createServer(function(req, res){
