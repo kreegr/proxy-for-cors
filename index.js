@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 var httpProxy = require('http-proxy');
-var proxy = httpProxy.createProxyServer(options);
+var proxy = httpProxy.createProxyServer({});
 var http = require('http');
 
 var args = [].concat(process.argv).splice(-1);
